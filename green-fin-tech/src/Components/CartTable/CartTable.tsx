@@ -1,103 +1,29 @@
 import React from "react";
 import { Card, Link, CardContent, CardActions, Button, Table, TableHead, TableRow, TableCell, TableBody, TextField, Checkbox } from '@mui/material';
 
-const CartTable: React.FC = () => {
-    const [data, setData] = React.useState([
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-        {
-          ticker: 'AAPL',
-          totalSum: 0,
-          amountOfStocks: 0,
-          proportion: 0,
-          isSelected: false
-        },
-    ]);
+// add remove button
 
-    type DataType = {
-        ticker: string;
-        totalSum: number;
-        amountOfStocks: number;
-        proportion: number;
-        isSelected: boolean;
-      };
+import { useSelector } from 'react-redux';
+import { RootState } from './../../Store/Store';
+
+const CartTable: React.FC = () => {
+    const cartItems = useSelector((state: RootState) => state.cart.items);
       
-      const handleSumChange = (index: number, value: string) => {
-        console.log('handleSumChange: ' + value);
-      }; 
-      
-      const handleAmountOfStocksChange = (index: number, value: string) => {
-        console.log('handleAmountOfStocksChange: ' + value);
-      }; 
-      
-      const handleProportionChange = (index: number, value: string) => {
-        console.log('handleProportionChange: ' + value);
-      }; 
-      
-      const handleIsSelectedChange = (index: number, value: boolean) => {
-        console.log('handleIsSelectedChange: ' + value);
-      }; 
+    const handleSumChange = (index: number, value: string) => {
+      console.log('handleSumChange: ' + value);
+    }; 
+    
+    const handleAmountOfStocksChange = (index: number, value: string) => {
+      console.log('handleAmountOfStocksChange: ' + value);
+    }; 
+    
+    const handleProportionChange = (index: number, value: string) => {
+      console.log('handleProportionChange: ' + value);
+    }; 
+    
+    const handleIsSelectedChange = (index: number, value: boolean) => {
+      console.log('handleIsSelectedChange: ' + value);
+    }; 
   
     return (
     <Card style={{ backgroundColor: '#f5f5f5' }}> {/* Change the background color as needed */}
@@ -113,7 +39,7 @@ const CartTable: React.FC = () => {
             </TableRow>
             </TableHead>
             <TableBody>
-            {data.map((row, index) => (
+            {cartItems.map((row, index) => (
                 <TableRow key={index}>
                     <TableCell>
                         <Checkbox
