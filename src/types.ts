@@ -1,4 +1,3 @@
-// types.ts
 export type CartItem = {
     ticker: string;
     totalSum: number;
