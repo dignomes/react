@@ -4,27 +4,27 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4CAF50',  // Primary green color, representing nature.
-      light: '#80E27E',
-      dark: '#087F23',
+      main: '#004F4A',  // Replaced with the first color.
+      light: '#65FF9D',  // Replaced with the second color.
+      dark: '#002F35',  // Replaced with the third color.
       contrastText: '#fff',
     },
     secondary: {
-      main: '#FFEB3B',  // Sun-inspired yellow as the secondary color, symbolizing sunlight or warmth.
-      light: '#FFF9C4',
-      dark: '#FBC02D',
+      main: '#02CB6D',  // Replaced with the fourth color.
+      light: '#4FE8A0',  // Lightened version of the fourth color.
+      dark: '#00984A',  // Darkened version of the fourth color.
       contrastText: '#000',
     },
     error: {
       main: '#f44336',
     },
     background: {
-      default: '#E8F5E9',  // Light green background.
-      paper: '#AED581',  // Slightly darker green for raised components.
+      default: '#C2EFD3',  // Lightened version of the primary main color.
+      paper: '#33A085',  // Darkened version of the primary main color.
     },
     text: {
-      primary: '#2E7D32',  // Primary text in green.
-      secondary: '#6A4F4B',  // Earthy brown for secondary text, representing the soil.
+      primary: '#023825',  // Darkened version of the primary dark color.
+      secondary: '#6A4F4B',  // Kept the original earthy brown for secondary text.
     }
   },
 });
