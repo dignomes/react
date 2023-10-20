@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Box, Typography } from '@mui/material';
-
+import { useSwipeable } from 'react-swipeable'
+import SwipeableImage from './Swippable/SwippableImage'
+ 
 const Home: React.FC = () => {
+  
+
   return (
     <Box 
       display="flex"
@@ -16,6 +20,7 @@ const Home: React.FC = () => {
       <Typography variant="h4" gutterBottom>
         Le punir Technologies
       </Typography>
+      <SwipeableImage></SwipeableImage>
 
       <Box mt={3}> {/* Margin-top for some space */}
         <Button variant="contained" color="primary" style={{ marginRight: '10px' }}>

@@ -1,0 +1,16 @@
+.swiperparrent {
+    background-color: #000;
+    overflow: hidden;
+    position: relative;
+  }
+  
+.swiper {
+  display: flex;
+  overflow-x: visible;
+  transition-property: transform;
+  will-change: transform;
+}
+  
+img {
+  object-fit: contain;
+}
