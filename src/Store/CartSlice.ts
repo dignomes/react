@@ -9,17 +9,17 @@ const initialState: CartState = {
     items: [
       {
         ticker: 'AAPL',
-        totalSum: 0,
-        amountOfStocks: 0,
-        proportion: 0,
-        isSelected: false
+        totalSum: 1000,
+        amountOfStocks: 44,
+        proportion: 44,
+        isSelected: true
       },
       {
-        ticker: 'AAPL',
-        totalSum: 0,
-        amountOfStocks: 0,
-        proportion: 0,
-        isSelected: false
+        ticker: 'XOM',
+        totalSum: 100,
+        amountOfStocks: 43,
+        proportion: 56,
+        isSelected: true
       },
     ]
   };
