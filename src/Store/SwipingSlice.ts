@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getStocks } from '../API/SwipeAPI';
+import { dislikeStock, getStock, getStocks, likeStock } from '../API/SwipeAPI';
 import { Stock } from '../types';
 
 type SwipingState = {
@@ -17,6 +17,30 @@ export const getSomeStocks = createAsyncThunk(
   'stocks/getStocks',
   async () => {
     const response = await getStocks();
+    return response;
+  }
+);
+
+export const getSingleStock = createAsyncThunk(
+  'stocks/getStock',
+  async () => {
+    const response = await getStock();
+    return response;
+  }
+);
+
+export const sendStockLike = createAsyncThunk(
+  'stocks/getStocks',
+  async (ticker: string) => {
+    const response = await likeStock(ticker);
+    return response;
+  }
+);
+
+export const sendStockDislike = createAsyncThunk(
+  'stocks/getStocks',
+  async (ticker: string) => {
+    const response = await dislikeStock(ticker);
     return response;
   }
 );
