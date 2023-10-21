@@ -7,10 +7,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 import Contacts from './Contacts/Contacts';
 import About from './About/About';
 import Cart from './Cart/Cart';
-import { Provider } from 'react-redux';
-import store from './Store/Store';
+import {Provider, useDispatch} from 'react-redux';
+import store, {AppDispatch} from './Store/Store';
 import { useEffect, useState } from 'react';
 import DisclaimerModal from './Components/DisclamerModal/DisclamerModal';
+import {getSomeStocks} from "./Store/SwipingSlice";
 
 function App() {
   const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState<boolean>(false);
@@ -21,7 +22,6 @@ function App() {
       setHasAcceptedDisclaimer(true);
     }
   }, []);
-
   const handleAccept = () => {
     localStorage.setItem('hasAcceptedDisclaimer', 'true');
     setHasAcceptedDisclaimer(true);

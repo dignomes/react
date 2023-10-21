@@ -5,12 +5,14 @@ import { Stock } from '../types';
 type SwipingState = {
   index: number,
   stocks: Stock[],
+  currentStock?: Stock
   // Define the state shape here
 };
 
 const initialState: SwipingState = {
   index: 0,
   stocks: [],
+  currentStock: undefined
 };
 
 export const getSomeStocks = createAsyncThunk(
@@ -22,7 +24,7 @@ export const getSomeStocks = createAsyncThunk(
 );
 
 export const getSingleStock = createAsyncThunk(
-  'stocks/getStock',
+  'stocks/getSingleStock',
   async () => {
     const response = await getStock();
     return response;
@@ -30,17 +32,17 @@ export const getSingleStock = createAsyncThunk(
 );
 
 export const sendStockLike = createAsyncThunk(
-  'stocks/getStocks',
-  async (ticker: string) => {
-    const response = await likeStock(ticker);
+  'stocks/sendStockLike',
+  async (id: number) => {
+    const response = await likeStock(id);
     return response;
   }
 );
 
 export const sendStockDislike = createAsyncThunk(
-  'stocks/getStocks',
-  async (ticker: string) => {
-    const response = await dislikeStock(ticker);
+  'stocks/sendStockDislike',
+  async (id: number) => {
+    const response = await dislikeStock(id);
     return response;
   }
 );
@@ -53,16 +55,21 @@ export const swipingSlice = createSlice({
     setSwiping: (state, action: PayloadAction<number>) => {
       // Handle the action here
     },
-    removeItem: (state, action: PayloadAction<string>) => {
-      state.stocks = state.stocks.filter(item => item.ticker !== action.payload);
+    removeItem: (state, action: PayloadAction<number>) => {
+      state.stocks = state.stocks.filter(item => item.id !== action.payload);
+      state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
+    },
+    setCurrent: (state, action: PayloadAction<number>) => {
+        state.currentStock = state.stocks.find(item => item.id == action.payload);
     },
   },
   extraReducers: builder => {
     builder.addCase(getSomeStocks.fulfilled, (state, action) => {
       state.stocks = action.payload;  // Assuming the API returns an array of items directly.
+      state.currentStock = action.payload.length ? action.payload[0] : undefined;
     });
   }
 });
 
-export const { setSwiping, removeItem } = swipingSlice.actions;
+export const { setSwiping, removeItem, setCurrent } = swipingSlice.actions;
 export default swipingSlice.reducer;
