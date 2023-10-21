@@ -10,15 +10,15 @@ import {AppDispatch, RootState} from '../Store/Store';
 const cat_indexes = [0, 1, 2, 3];
 
 const Home: React.FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    // const dispatch = useDispatch<AppDispatch>();
 
     // const aStock = dispatch(getSingleStock());
     // dispatch(sendStockLike('AAPL'));
     // dispatch(sendStockDislike('AAPL'));
 
-    useEffect(() => {
-        dispatch(getSomeStocks());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getSomeStocks());
+    // }, []);
 
 
     const isMobile = window.innerWidth <= 768;
