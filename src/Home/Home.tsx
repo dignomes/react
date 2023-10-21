@@ -1,27 +1,28 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Button from '@mui/material/Button';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { Box, Typography } from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import ShareCard from '../Components/ShareCard/ShareCard'
-import { useDispatch, useSelector } from 'react-redux';
-import { getSingleStock, getSomeStocks, sendStockDislike, sendStockLike } from '../Store/SwipingSlice';
-import { AppDispatch, RootState } from '../Store/Store';
+import {useDispatch, useSelector} from 'react-redux';
+import {getSingleStock, getSomeStocks, sendStockDislike, sendStockLike} from '../Store/SwipingSlice';
+import {AppDispatch, RootState} from '../Store/Store';
 
-const cat_indexes = [0,1,2,3];
+const cat_indexes = [0, 1, 2, 3];
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const items = useSelector((state: RootState) => state.swiping.stocks);
+    const items = useSelector((state: RootState) => state.swiping.stocks);
+    const dispatch = useDispatch<AppDispatch>();
 
-  // const aStock = dispatch(getSingleStock());
-  // dispatch(sendStockLike('AAPL'));
-  // dispatch(sendStockDislike('AAPL'));
+    // const aStock = dispatch(getSingleStock());
+    // dispatch(sendStockLike('AAPL'));
+    // dispatch(sendStockDislike('AAPL'));
 
-    console.log(items);
     useEffect(() => {
         dispatch(getSomeStocks());
-
     }, []);
+
+
+    const isMobile = window.innerWidth <= 768;
 
     return (<Box
         display="flex"
@@ -39,21 +40,21 @@ const Home: React.FC = () => {
         <div className='cardContainer'>
             {items.map((r, i) => <ShareCard
                 key={i}
-                ticker={r.ticker}
-                image_src={r.imageUrl}
+                id={r.id}
+                image_src={r.image_url}
                 description={r.description}
             ></ShareCard>)}
         </div>
 
 
-        <Box mt={3} className='swipeDesisionBox'> {/* Margin-top for some space */}
+        {!isMobile && (<Box mt={3} className='swipeDesisionBox'> {/* Margin-top for some space */}
             <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
                 Like
             </Button>
             <Button variant="contained" color="secondary">
                 Dislike
             </Button>
-        </Box>
+        </Box>)}
     </Box>);
 }
 

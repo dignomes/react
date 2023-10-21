@@ -7,7 +7,10 @@ export type CartItem = {
 };
 
 export type Stock = {
-    ticker: string;
+    id: number;
+    stock: string;
+    title: string;
     description: string;
-    imageUrl: string;
+    tags: string;
+    image_url: string;
 }

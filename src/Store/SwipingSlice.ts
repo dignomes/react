@@ -22,7 +22,7 @@ export const getSomeStocks = createAsyncThunk(
 );
 
 export const getSingleStock = createAsyncThunk(
-  'stocks/getStock',
+  'stocks/getSingleStock',
   async () => {
     const response = await getStock();
     return response;
@@ -30,17 +30,17 @@ export const getSingleStock = createAsyncThunk(
 );
 
 export const sendStockLike = createAsyncThunk(
-  'stocks/getStocks',
-  async (ticker: string) => {
-    const response = await likeStock(ticker);
+  'stocks/sendStockLike',
+  async (id: number) => {
+    const response = await likeStock(id);
     return response;
   }
 );
 
 export const sendStockDislike = createAsyncThunk(
-  'stocks/getStocks',
-  async (ticker: string) => {
-    const response = await dislikeStock(ticker);
+  'stocks/sendStockDislike',
+  async (id: number) => {
+    const response = await dislikeStock(id);
     return response;
   }
 );
@@ -53,8 +53,8 @@ export const swipingSlice = createSlice({
     setSwiping: (state, action: PayloadAction<number>) => {
       // Handle the action here
     },
-    removeItem: (state, action: PayloadAction<string>) => {
-      state.stocks = state.stocks.filter(item => item.ticker !== action.payload);
+    removeItem: (state, action: PayloadAction<number>) => {
+      state.stocks = state.stocks.filter(item => item.id !== action.payload);
     },
   },
   extraReducers: builder => {
