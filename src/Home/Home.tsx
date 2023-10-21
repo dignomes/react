@@ -10,7 +10,6 @@ import {AppDispatch, RootState} from '../Store/Store';
 const cat_indexes = [0, 1, 2, 3];
 
 const Home: React.FC = () => {
-    const items = useSelector((state: RootState) => state.swiping.stocks);
     const dispatch = useDispatch<AppDispatch>();
 
     // const aStock = dispatch(getSingleStock());
@@ -38,12 +37,7 @@ const Home: React.FC = () => {
 
 
         <div className='cardContainer'>
-            {items.map((r, i) => <ShareCard
-                key={i}
-                id={r.id}
-                image_src={r.image_url}
-                description={r.description}
-            ></ShareCard>)}
+            <ShareCard></ShareCard>
         </div>
 
 

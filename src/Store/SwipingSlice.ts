@@ -5,12 +5,14 @@ import { Stock } from '../types';
 type SwipingState = {
   index: number,
   stocks: Stock[],
+  currentStock?: Stock
   // Define the state shape here
 };
 
 const initialState: SwipingState = {
   index: 0,
   stocks: [],
+  currentStock: undefined
 };
 
 export const getSomeStocks = createAsyncThunk(
@@ -55,14 +57,19 @@ export const swipingSlice = createSlice({
     },
     removeItem: (state, action: PayloadAction<number>) => {
       state.stocks = state.stocks.filter(item => item.id !== action.payload);
+      state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
+    },
+    setCurrent: (state, action: PayloadAction<number>) => {
+        state.currentStock = state.stocks.find(item => item.id == action.payload);
     },
   },
   extraReducers: builder => {
     builder.addCase(getSomeStocks.fulfilled, (state, action) => {
       state.stocks = action.payload;  // Assuming the API returns an array of items directly.
+      state.currentStock = action.payload.length ? action.payload[0] : undefined;
     });
   }
 });
 
-export const { setSwiping, removeItem } = swipingSlice.actions;
+export const { setSwiping, removeItem, setCurrent } = swipingSlice.actions;
 export default swipingSlice.reducer;
