@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Box, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSomeStocks } from '../Store/SwipingSlice';
+import { AppDispatch, RootState } from '../Store/Store';
 
 const Home: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const items = useSelector((state: RootState) => state.swiping.stocks);
+
+  useEffect(() => {
+    dispatch(getSomeStocks());
+    
+  }, []); 
+
   return (
     <Box 
       display="flex"

@@ -5,3 +5,9 @@ export type CartItem = {
     proportion: number;
     isSelected: boolean;
 };
+
+export type Stock = {
+    ticker: string;
+    desctiption: string;
+    imageUrl: string;
+}

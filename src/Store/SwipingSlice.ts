@@ -1,12 +1,22 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getStocks } from '../API/SwipeAPI';
+import { Stock } from '../types';
 
 type SwipingState = {
-  // Define the state shape here
+  stocks: Stock[],
 };
 
 const initialState: SwipingState = {
-  // Initialize your state here
+  stocks: []
 };
+
+export const getSomeStocks = createAsyncThunk(
+  'stocks/getStocks',
+  async () => {
+    const response = await getStocks();
+    return response;
+  }
+);
 
 export const swipingSlice = createSlice({
   name: 'swiping',
@@ -16,6 +26,11 @@ export const swipingSlice = createSlice({
     setSwiping: (state, action: PayloadAction<number>) => {
       // Handle the action here
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(getSomeStocks.fulfilled, (state, action) => {
+      state.stocks = action.payload;  // Assuming the API returns an array of items directly.
+    });
   }
 });
 
