@@ -27,3 +27,20 @@
   table {
     table-layout: fixed;
   }
+  
+  .visualColors{
+    --primary-main: #004F4A;
+--primary-light: #65FF9D;
+--primary-dark: #002F35;
+--primary-contrastText: #fff;
+--secondary-main: #02CB6D;
+--secondary-light: #4FE8A0;
+--secondary-dark: #00984A;
+--secondary-contrastText: #000;
+--error-main: #f44336;
+--background-default: #C2EFD3;
+--background-paper: #33A085;
+--text-primary: #023825;
+--text-secondary: #6A4F4B;
+
+  }
