@@ -35,7 +35,7 @@ export const getStock = async () => {
     const st: Stock = 
     {
         ticker: 'AAPL',
-        desctiption: 'You are simply the best',
+        description: 'You are simply the best',
         imageUrl: 'https://th.bing.com/th?id=OIP.m1ar389tpEOAFN1NTurqvwHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
     };
 
