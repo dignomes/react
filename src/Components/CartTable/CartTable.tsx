@@ -1,12 +1,10 @@
 import React from "react";
 import { Card, Link, CardContent, CardActions, Button, Table, TableHead, TableRow, TableCell, TableBody, TextField, Checkbox } from '@mui/material';
 
-// add remove button
-
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from './../../Store/Store';
 
-import { selectStock, setAmount, setProportion, setSum } from './../../Store/CartSlice';
+import { removeItem, selectStock, setAmount, setProportion, setSum } from './../../Store/CartSlice';
 import { CartItem } from "../../types";
 
 const CartTable: React.FC = () => {
@@ -66,6 +64,10 @@ const CartTable: React.FC = () => {
 
       dispatch(selectStock(payload));
     }; 
+
+    const handleRemoveItem = (ticker: string) => {
+        dispatch(removeItem(ticker));
+    }
   
     return (
     <Card style={{ backgroundColor: '#f5f5f5' }}> {/* Change the background color as needed */}
@@ -122,6 +124,15 @@ const CartTable: React.FC = () => {
                         onChange={(e) => handleProportionChange(row.ticker, parseFloat(e.target.value))}
                         type="number"
                         />
+                    </TableCell>
+                    <TableCell>
+                        <Button 
+                            variant="contained" 
+                            color="secondary"
+                            onClick={() => handleRemoveItem(row.ticker)}
+                        >
+                            Remove
+                        </Button>
                     </TableCell>
                 </TableRow>
             ))}
