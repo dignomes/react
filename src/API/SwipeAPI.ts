@@ -1,8 +1,11 @@
 import { Stock } from '../types';
+import axiosInstance from './AxiosInstance';
 
 export const getStocks = async () => {
-    // const response = await axiosInstance.get('/stocks');
+    const response = await axiosInstance.get('/api/stock-recommend/');
     // return response.data;
+    console.log("response");
+    console.log(response);
     const st: Stock[] = [
         {
             ticker: 'AAPL',
