@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type SwipingState = {
+  index: number
   // Define the state shape here
 };
 
 const initialState: SwipingState = {
+  index: 0
   // Initialize your state here
 };
 

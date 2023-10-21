@@ -1,23 +1,12 @@
-import React, {useMemo, useState} from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Box, Typography } from '@mui/material';
-import { useSwipeable } from 'react-swipeable'
 import ShareCard from '../Components/ShareCard/ShareCard'
  
 const cat_indexes = [0,1,2,3]
 
 const Home: React.FC = () => {
-  const childRefs = useMemo(
-    () =>
-      Array(cat_indexes.length)
-        .fill(0)
-        .map((i) => React.createRef()),
-    []
-  )
-
-
-
   return (
     <Box 
       display="flex"
@@ -33,7 +22,7 @@ const Home: React.FC = () => {
 
 
       <div className='cardContainer'>
-        {cat_indexes.map((r,i) => <ShareCard index={i} ref={childRefs} key={i}></ShareCard>)}
+        {cat_indexes.map((r,i) => <ShareCard key={i} index={i}></ShareCard>)}
       </div>
       
 

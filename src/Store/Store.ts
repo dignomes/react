@@ -5,7 +5,7 @@ import cartReducer from './CartSlice';
 const Store = configureStore({
   reducer: {
     swiping: swipingReducer,
-    cart: cartReducer
+    cart: cartReducer,
   }
 });
 
