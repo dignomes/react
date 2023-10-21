@@ -27,10 +27,10 @@ const Home: React.FC = () => {
       justifyContent="center"
       height="100vh" // This will make it take up the full height of the viewport
     >
-      <AttachMoneyIcon fontSize="large" color="primary" />
-      <Typography variant="h4" gutterBottom>
-        Le punir Technologies
-      </Typography>
+      {/*<AttachMoneyIcon fontSize="large" color="primary" />*/}
+      {/*<Typography variant="h4" gutterBottom>*/}
+      {/*  Le punir Technologies*/}
+      {/*</Typography>*/}
 
 
       <div className='cardContainer'>
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
       </div>
       
 
-      <Box mt={3}> {/* Margin-top for some space */}
+      <Box mt={3} className='swipeDesisionBox'> {/* Margin-top for some space */}
         <Button variant="contained" color="primary" style={{ marginRight: '10px' }}>
           Like
         </Button>

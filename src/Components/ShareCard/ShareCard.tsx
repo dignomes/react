@@ -19,7 +19,7 @@ const ShareCard = ({ ticker, image_src } : {ticker: string, image_src: string}) 
             onCardLeftScreen={removeCard}
             preventSwipe={['up', 'down']}
         >
-            <Card style={{backgroundColor: '#f5f5f5'}}>
+            <Card style={{backgroundColor: '#f5f5f5', minWidth: '100%', minHeight: '100%'}}>
                 <img src={image_src} className='card' alt='something'/>
             </Card>
         </TinderCard>
