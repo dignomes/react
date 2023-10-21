@@ -5,15 +5,18 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; // Import cart 
 import Badge from '@mui/material/Badge'; // Import Badge component
 import { RootState } from '../Store/Store';
 import { useSelector } from 'react-redux';
+import { useTheme } from '@mui/material/styles';
+
 
 const Navbar: React.FC = () => {
   const cartItemsAmount = useSelector((state: RootState) => state.cart.items.length);
 
+  const theme = useTheme();
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
+        <Typography variant="h6" style={{ flexGrow: 1, color: theme.palette.primary.light }}>
           Grindai
         </Typography>
         <Button color="inherit" component={Link} to="/">Swipe</Button>
