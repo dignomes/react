@@ -6,6 +6,13 @@ const About: React.FC = () => {
 
   const theme = useTheme();
 
+  const sxStyles = { 
+    margin: '20px 0', 
+    padding: '15px', 
+    color: theme.palette.primary.contrastText, 
+    background: theme.palette.secondary.dark,
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -13,7 +20,7 @@ const About: React.FC = () => {
           <img src="/images/Cartoon.png" alt="Cartoon" style={{ width: '100%' }} />
         </Box>
         
-        <Paper elevation={3} sx={{ margin: '20px 0', padding: '15px', color: theme.palette.secondary.contrastText }}>
+        <Paper elevation={3} sx={sxStyles}>
           <Typography variant="h5" gutterBottom>
             Environmentally Friendly Companies
           </Typography>
@@ -22,7 +29,7 @@ const About: React.FC = () => {
           </Typography>
         </Paper>
 
-        <Paper elevation={3} sx={{ margin: '20px 0', padding: '15px', color: theme.palette.secondary.contrastText }}>
+        <Paper elevation={3} sx={sxStyles}>
           <Typography variant="h5" gutterBottom>
             Discover Stocks with Our App
           </Typography>
@@ -31,7 +38,7 @@ const About: React.FC = () => {
           </Typography>
         </Paper>
 
-        <Paper elevation={3} sx={{ margin: '20px 0', padding: '15px', color: theme.palette.secondary.contrastText }}>
+        <Paper elevation={3} sx={sxStyles}>
           <Typography variant="h5" gutterBottom>
             AI-Powered Suggestions
           </Typography>
