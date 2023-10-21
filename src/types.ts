@@ -13,4 +13,5 @@ export type Stock = {
     description: string;
     tags: string;
     image_url: string;
+    ticker_symbol: string
 }

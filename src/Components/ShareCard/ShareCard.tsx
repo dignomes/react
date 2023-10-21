@@ -11,6 +11,7 @@ const ShareCard = () => {
     const current = useSelector((state: RootState) => state.swiping.currentStock);
 
     items = [...items].reverse();
+    items = [...items].slice(-3);
 
     if (!current) {
         return (<div>no data</div>)
@@ -40,7 +41,7 @@ const ShareCard = () => {
                 preventSwipe={['up', 'down']}
                 swipeRequirementType='position'
                 className='cardItem'
-                key={i}
+                key={r.ticker_symbol}
             >
                 <img src={r.image_url} className='card' alt={r.title}/>
             </TinderCard>))}
