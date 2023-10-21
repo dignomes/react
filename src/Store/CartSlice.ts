@@ -5,8 +5,12 @@ type CartState = {
   items: CartItem[];
 };
 
-const initialState: CartState = {
-    items: [
+const savedCartData = localStorage.getItem('cartState');
+
+const parsedCartData: CartState | null = savedCartData ? JSON.parse(savedCartData) : null;
+
+const initialState: CartState = parsedCartData || {
+  items: [
       {
         ticker: 'AAPL',
         totalSum: 10,
