@@ -76,3 +76,14 @@
   position: absolute;
   bottom: 10px;
 }
+
+.textOverlay {
+  position: absolute;
+  bottom: 10px;  /* отступ от нижнего края */
+  left: 10px;  /* отступ от левого края */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);  /* полупрозрачный черный фон для лучшей читаемости */
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+

@@ -8,6 +8,6 @@ export type CartItem = {
 
 export type Stock = {
     ticker: string;
-    desctiption: string;
+    description: string;
     imageUrl: string;
 }
