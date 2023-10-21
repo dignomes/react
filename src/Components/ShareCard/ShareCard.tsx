@@ -1,16 +1,26 @@
 import React from 'react'
 import TinderCard from 'react-tinder-card'
 import {Card} from '@mui/material'
-import {useSelector} from "react-redux";
-import {RootState} from "../../Store/Store";
+import { removeItem } from './../../Store/SwipingSlice';
+import {useDispatch} from "react-redux";
 
-const ShareCard = ({ index } : {index: number}) => {
+const ShareCard = ({ ticker, image_src } : {ticker: string, image_src: string}) => {
     // const index = useSelector((state: RootState) => state.swiping.index);
+    const dispatch = useDispatch();
 
-    return (
-        <TinderCard className='swipe'>
+    const removeCard = () => {
+        dispatch(removeItem(ticker))
+    }
+
+    let isVisible = true
+    return (<TinderCard
+            className='swipe'
+            onSwipe={(direction) => console.log(`You swiped: ${direction}, index: ${ticker}`)}
+            onCardLeftScreen={removeCard}
+            preventSwipe={['up', 'down']}
+        >
             <Card style={{backgroundColor: '#f5f5f5'}}>
-                <img src={process.env.PUBLIC_URL + '/images/cat' + index + '.jpeg'} className='card' alt='something'/>
+                <img src={image_src} className='card' alt='something'/>
             </Card>
         </TinderCard>
     )

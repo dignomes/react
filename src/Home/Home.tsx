@@ -6,7 +6,7 @@ import ShareCard from '../Components/ShareCard/ShareCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSomeStocks } from '../Store/SwipingSlice';
 import { AppDispatch, RootState } from '../Store/Store';
- 
+
 const cat_indexes = [0,1,2,3];
 
 const Home: React.FC = () => {
@@ -16,8 +16,8 @@ const Home: React.FC = () => {
   console.log(items);
   useEffect(() => {
     dispatch(getSomeStocks());
-    
-  }, []); 
+
+  }, []);
 
   return (
     <Box 
@@ -34,7 +34,7 @@ const Home: React.FC = () => {
 
 
       <div className='cardContainer'>
-        {cat_indexes.map((r,i) => <ShareCard key={i} index={i}></ShareCard>)}
+        {items.map((r,i) => <ShareCard key={i} ticker={r.ticker} image_src={r.imageUrl}></ShareCard>)}
       </div>
       
 
