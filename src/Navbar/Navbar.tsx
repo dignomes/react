@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 const Navbar: React.FC = () => {
   const cartItemsAmount = useSelector((state: RootState) => state.cart.items.length);
 
+
   return (
     <AppBar position="static">
       <Toolbar>

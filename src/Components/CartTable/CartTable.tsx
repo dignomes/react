@@ -1,29 +1,73 @@
 import React from "react";
 import { Card, Link, CardContent, CardActions, Button, Table, TableHead, TableRow, TableCell, TableBody, TextField, Checkbox } from '@mui/material';
 
-// add remove button
-
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from './../../Store/Store';
 
+import { removeItem, selectStock, setAmount, setProportion, setSum } from './../../Store/CartSlice';
+import { CartItem } from "../../types";
+
 const CartTable: React.FC = () => {
+
+    const dispatch = useDispatch();
     const cartItems = useSelector((state: RootState) => state.cart.items);
-      
-    const handleSumChange = (index: number, value: string) => {
-      console.log('handleSumChange: ' + value);
+    
+    const handleSumChange = (ticker: string, sum: number) => {
+      console.log('handleSumChange: ' + sum);
+      const payload: CartItem = {
+        ticker,
+        totalSum: sum,
+        amountOfStocks: 0,
+        proportion: 0,
+        isSelected: false
+      }
+
+      dispatch(setSum(payload));
     }; 
     
-    const handleAmountOfStocksChange = (index: number, value: string) => {
-      console.log('handleAmountOfStocksChange: ' + value);
+    const handleAmountOfStocksChange = (ticker: string, amount: number) => {
+      console.log('handleAmountOfStocksChange: ' + amount);
+      const payload: CartItem = {
+        ticker,
+        totalSum: 0,
+        amountOfStocks: amount,
+        proportion: 0,
+        isSelected: false
+      }
+
+      dispatch(setAmount(payload));
     }; 
     
-    const handleProportionChange = (index: number, value: string) => {
-      console.log('handleProportionChange: ' + value);
+    const handleProportionChange = (ticker: string, proportion: number) => {
+      console.log('handleProportionChange: ' + proportion);
+      const payload: CartItem = {
+        ticker,
+        totalSum: 0,
+        amountOfStocks: 0,
+        proportion,
+        isSelected: false
+      }
+
+      dispatch(setProportion(payload));
     }; 
     
-    const handleIsSelectedChange = (index: number, value: boolean) => {
+    const handleIsSelectedChange = (ticker: string, value: boolean) => {
       console.log('handleIsSelectedChange: ' + value);
+
+      const payload: CartItem = {
+        ticker,
+        totalSum: 0,
+        amountOfStocks: 0,
+        proportion: 0,
+        isSelected: value
+      }
+
+      dispatch(selectStock(payload));
     }; 
+
+    const handleRemoveItem = (ticker: string) => {
+        dispatch(removeItem(ticker));
+    }
   
     return (
     <Card style={{ backgroundColor: '#f5f5f5' }}> {/* Change the background color as needed */}
@@ -44,7 +88,7 @@ const CartTable: React.FC = () => {
                     <TableCell>
                         <Checkbox
                         checked={row.isSelected}
-                        onChange={(e) => handleIsSelectedChange(index, e.target.checked)}
+                        onChange={(e) => handleIsSelectedChange(row.ticker, e.target.checked)}
                         />
                     </TableCell>
                     <TableCell>
@@ -60,23 +104,35 @@ const CartTable: React.FC = () => {
                     <TableCell>
                         <TextField
                         value={row.totalSum}
-                        onChange={(e) => handleSumChange(index, e.target.value)}
+                        onChange={(e) => 
+                            handleSumChange(row.ticker, parseFloat(e.target.value))
+                        }
                         type="number"
+                        variant="outlined"
                         />
                     </TableCell>
                     <TableCell>
                         <TextField
                         value={row.amountOfStocks}
-                        onChange={(e) => handleAmountOfStocksChange(index, e.target.value)}
+                        onChange={(e) => handleAmountOfStocksChange(row.ticker, parseFloat(e.target.value))}
                         type="number"
                         />
                     </TableCell>
                     <TableCell>
                         <TextField
                         value={row.proportion}
-                        onChange={(e) => handleProportionChange(index, e.target.value)}
+                        onChange={(e) => handleProportionChange(row.ticker, parseFloat(e.target.value))}
                         type="number"
                         />
+                    </TableCell>
+                    <TableCell>
+                        <Button 
+                            variant="contained" 
+                            color="secondary"
+                            onClick={() => handleRemoveItem(row.ticker)}
+                        >
+                            Remove
+                        </Button>
                     </TableCell>
                 </TableRow>
             ))}
