@@ -52,7 +52,10 @@ export const swipingSlice = createSlice({
     // For example:
     setSwiping: (state, action: PayloadAction<number>) => {
       // Handle the action here
-    }
+    },
+    removeItem: (state, action: PayloadAction<string>) => {
+      state.stocks = state.stocks.filter(item => item.ticker !== action.payload);
+    },
   },
   extraReducers: builder => {
     builder.addCase(getSomeStocks.fulfilled, (state, action) => {
@@ -61,5 +64,5 @@ export const swipingSlice = createSlice({
   }
 });
 
-export const { setSwiping } = swipingSlice.actions;
+export const { setSwiping, removeItem } = swipingSlice.actions;
 export default swipingSlice.reducer;
