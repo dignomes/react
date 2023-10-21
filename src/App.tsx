@@ -9,8 +9,24 @@ import About from './About/About';
 import Cart from './Cart/Cart';
 import { Provider } from 'react-redux';
 import store from './Store/Store';
+import { useEffect, useState } from 'react';
+import DisclaimerModal from './Components/DisclamerModal/DisclamerModal';
 
 function App() {
+  const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState<boolean>(false);
+  
+  useEffect(() => {
+    const accepted = localStorage.getItem('hasAcceptedDisclaimer');
+    if (accepted) {
+      setHasAcceptedDisclaimer(true);
+    }
+  }, []);
+
+  const handleAccept = () => {
+    localStorage.setItem('hasAcceptedDisclaimer', 'true');
+    setHasAcceptedDisclaimer(true);
+  };
+
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -23,6 +39,7 @@ function App() {
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/cart" element={<Cart />} />
             </Routes>
+            <DisclaimerModal isOpen={!hasAcceptedDisclaimer} onAccept={handleAccept} />
           </div>
         </Router>
       </ThemeProvider>
