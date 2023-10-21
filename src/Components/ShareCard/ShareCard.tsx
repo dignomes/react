@@ -5,37 +5,50 @@ import {removeItem, sendStockLike, sendStockDislike} from './../../Store/Swiping
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../Store/Store";
 
-const ShareCard = ({ id, image_src, description } : {id: number, image_src: string, description: string}) => {
+const ShareCard = () => {
     const dispatch = useDispatch<AppDispatch>();
+    let items = useSelector((state: RootState) => state.swiping.stocks);
+    const current = useSelector((state: RootState) => state.swiping.currentStock);
 
-    const removeCard = () => {
-        dispatch(removeItem(id));
+    items = [...items].reverse();
+
+    if (!current) {
+        return (<div>no data</div>)
     }
+    //
+    // const removeCard = () => {
+    //     dispatch(removeItem(current.id));
+    // }
 
     const handleSwipe = (direction: any) => {
-        if(direction === 'right'){
-            dispatch(sendStockLike(id))
+        dispatch(removeItem(current.id));
+        if (direction === 'right') {
+            dispatch(sendStockLike(current.id))
         } else {
-            dispatch(sendStockDislike(id))
+            dispatch(sendStockDislike(current.id))
         }
     }
 
+    console.log(items);
+
     let isVisible = true
-    return (<TinderCard
-            className='swipe'
-            onSwipe={handleSwipe}
-            onCardLeftScreen={removeCard}
-            preventSwipe={['up', 'down']}
-            swipeRequirementType='position'
-        >
-            <Card style={{backgroundColor: '#f5f5f5', display: 'flex', justifyContent: 'center', alignItems: 'center', minWidth: '100%', minHeight: '100%'}}>
-                <img src={image_src} className='card' alt='something'/>
-            </Card>
-            <div className="textOverlay">
-                {description}
-            </div>
-        </TinderCard>
-    )
+    return (<Card className='swipe'>
+        <div className='tinderCard'>
+            {items.map((r, i) => (<TinderCard
+                onSwipe={handleSwipe}
+                // onCardLeftScreen={removeCard}
+                preventSwipe={['up', 'down']}
+                swipeRequirementType='position'
+                className='cardItem'
+                key={i}
+            >
+                <img src={r.image_url} className='card' alt={r.title}/>
+            </TinderCard>))}
+        </div>
+        <div className="textOverlay">
+            {current.description}
+        </div>
+    </Card>)
 }
 
 export default ShareCard;
