@@ -28,7 +28,7 @@ const ShareCard = ({ id, image_src, description } : {id: number, image_src: stri
             preventSwipe={['up', 'down']}
             swipeRequirementType='position'
         >
-            <Card style={{backgroundColor: '#f5f5f5', minWidth: '100%', minHeight: '100%'}}>
+            <Card style={{backgroundColor: '#f5f5f5', display: 'flex', justifyContent: 'center', alignItems: 'center', minWidth: '100%', minHeight: '100%'}}>
                 <img src={image_src} className='card' alt='something'/>
             </Card>
             <div className="textOverlay">
