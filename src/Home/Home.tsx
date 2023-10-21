@@ -25,7 +25,7 @@ const Home: React.FC = () => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      height="100vh" // This will make it take up the full height of the viewport
+      height="calc(100vh - 64px)" // This will make it take up the full height of the viewport
     >
       {/*<AttachMoneyIcon fontSize="large" color="primary" />*/}
       {/*<Typography variant="h4" gutterBottom>*/}
