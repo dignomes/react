@@ -2,6 +2,9 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Box, Typography } from '@mui/material';
+import ShareCard from '../Components/ShareCard/ShareCard'
+ 
+const cat_indexes = [0,1,2,3]
 
 const Home: React.FC = () => {
   return (
@@ -16,6 +19,12 @@ const Home: React.FC = () => {
       <Typography variant="h4" gutterBottom>
         Le punir Technologies
       </Typography>
+
+
+      <div className='cardContainer'>
+        {cat_indexes.map((r,i) => <ShareCard key={i} index={i}></ShareCard>)}
+      </div>
+      
 
       <Box mt={3}> {/* Margin-top for some space */}
         <Button variant="contained" color="primary" style={{ marginRight: '10px' }}>
