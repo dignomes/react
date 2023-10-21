@@ -27,6 +27,15 @@ const theme = createTheme({
       secondary: '#6A4F4B',  // Kept the original earthy brown for secondary text.
     }
   },
+  components: {  // <-- Add this key
+    MuiInputBase: { 
+      styleOverrides: {
+        input: {
+          textAlign: 'right',
+        },
+      },
+    },
+  },
 });
 
 export default theme;

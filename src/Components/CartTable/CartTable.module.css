@@ -1,0 +1,29 @@
+.cellStyle {
+    width: 100px;
+    text-align: center;
+    padding: 8px 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 40px;
+  }
+
+.firstColumnStyle {
+    width: 50px;
+    height: 40px;
+}
+
+.rightAlignCell {
+  text-align: right !important;
+}
+
+  
+  .stickyCell {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+  
+  table {
+    table-layout: fixed;
+  }

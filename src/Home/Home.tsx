@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import ShareCard from '../Components/ShareCard/ShareCard'
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleStock, getSomeStocks, sendStockDislike, sendStockLike } from '../Store/SwipingSlice';
+import { getSomeStocks } from '../Store/SwipingSlice';
 import { AppDispatch, RootState } from '../Store/Store';
-
-const cat_indexes = [0,1,2,3];
 
 const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
