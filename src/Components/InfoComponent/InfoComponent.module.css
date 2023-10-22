@@ -46,9 +46,10 @@
   border-radius: 8px;
 }
 
-/* InfoComponent.module.css */
 .cardStopPosition {
   position: absolute;
   bottom: 100px;  /* Adjust as per your requirement */
-  width: 100%;  /* Makes the card take up the full width of its parent */
+  width: 100vw;
+  box-sizing: border-box;  /* Sets the width equal to 100% of the viewport width */
 }
+
