@@ -6,7 +6,7 @@ import Badge from '@mui/material/Badge'; // Import Badge component
 import { RootState } from '../Store/Store';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-
+import { left } from '@popperjs/core';
 
 const Navbar: React.FC = () => {
   const cartItemsAmount = useSelector((state: RootState) => state.cart.items.length);
@@ -16,9 +16,11 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1, color: theme.palette.primary.light }}>
+        {/* Make sure Typography is the first child of Toolbar */}
+        <Typography variant="h6" style={{ flexGrow: 1, color: theme.palette.primary.light, textAlign: left }}>
           Grindai
         </Typography>
+        
         <Button color="inherit" component={Link} to="/">Swipe</Button>
         <Button color="inherit" component={Link} to="/about">Learn</Button>
         {/* <Button color="inherit" component={Link} to="/contacts">Contacts</Button> */}
