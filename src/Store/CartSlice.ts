@@ -26,6 +26,9 @@ export const cartSlice = createSlice({
 
     removeItem: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(item => item.ticker !== action.payload);
+
+      const portfolioSum = state.items.reduce((sum, item) => sum + item.totalSum, 0);
+      state.items = state.items.map(item => ({ ...item, proportion: item.totalSum / portfolioSum * 100 }));
     },
 
     setSum: (state, action: PayloadAction<CartItem>) => {
