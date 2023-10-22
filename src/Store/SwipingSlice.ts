@@ -81,14 +81,16 @@ export const swipingSlice = createSlice({
       state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
       state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
       if(action.payload){
-          state.stocks = state.stocks.concat(action.payload);
+          const new_stocks = action.payload.filter(p => !state.stocks.find(s => p.id === s.id))
+          state.stocks = state.stocks.concat(new_stocks);
       }
     }).addCase(sendStockDislike.fulfilled, (state, action) => {
       // @ts-ignore
       state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
       state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
       if(action.payload){
-          state.stocks = state.stocks.concat(action.payload);
+          const new_stocks = action.payload.filter(p => !state.stocks.find(s => p.id === s.id))
+          state.stocks = state.stocks.concat(new_stocks);
       }
     });
   }
