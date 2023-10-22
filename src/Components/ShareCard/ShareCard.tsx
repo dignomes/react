@@ -1,7 +1,7 @@
-import React, {useMemo, useRef} from 'react'
+import React from 'react'
 import {useSwipeable} from 'react-swipeable'
 import {Card} from '@mui/material'
-import {removeItem, sendStockLike, sendStockDislike} from './../../Store/SwipingSlice';
+import {sendStockDislike, sendStockLike} from './../../Store/SwipingSlice';
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../Store/Store";
 
@@ -17,6 +17,7 @@ const ShareCard = () => {
 
     let filtered_items = [...items].reverse();
     filtered_items = [...filtered_items].slice(-3);
+
     const handlers = useSwipeable({
         onSwiped: (eventData) => {
             console.log("User Swiped!", eventData);
