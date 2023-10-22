@@ -1,59 +1,52 @@
-import React from 'react'
-import TinderCard from 'react-tinder-card'
+import React, {useMemo, useRef} from 'react'
+import {useSwipeable} from 'react-swipeable'
 import {Card} from '@mui/material'
-import {removeItem, sendStockLike, sendStockDislike, loadStocks} from './../../Store/SwipingSlice';
+import {removeItem, sendStockLike, sendStockDislike} from './../../Store/SwipingSlice';
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../Store/Store";
 
+import Draggable from 'react-draggable'
+
+
 const ShareCard = () => {
-    // const dispatch = useDispatch<AppDispatch>();
-    const items = useSelector((state: RootState) => state.swiping.stocks);
-    const current = useSelector((state: RootState) => state.swiping.currentStock);
+    const dispatch = useDispatch<AppDispatch>();
+    const swiping = useSelector((state: RootState) => state.swiping);
+    const items = swiping.stocks;
+    const current = swiping.currentStock;
 
-
-    console.log('items', items);
 
     let filtered_items = [...items].reverse();
     filtered_items = [...filtered_items].slice(-3);
-    console.log('filtered_items', items);
+    const handlers = useSwipeable({
+        onSwiped: (eventData) => {
+            console.log("User Swiped!", eventData);
+            // dispatch(removeItem(current ? current.id : 0));
+            if (eventData.dir === 'Left') {
+                dispatch(sendStockDislike(current ? current.id : 0))
+            }
+            if (eventData.dir === 'Right') {
+                dispatch(sendStockLike(current ? current.id : 0))
+            }
+        },
+    });
 
     if (!current) {
         return (<div>no data</div>)
     }
-    //
-    // const removeCard = () => {
-    //     dispatch(removeItem(current.id));
-    // }
 
-    const handleSwipe = (direction: any, id: any) => {
-
-        // dispatch(removeItem(current.ticker_symbol));
-        if (direction === 'right') {
-            console.log('Like ' + id + ' ' + Math.random());
-            // dispatch(sendStockLike(current.id))
-        } else {
-            // dispatch(sendStockDislike(current.id))
-        }
-
-        // if(items.length <= 3) {
-        //     dispatch(loadStocks())
-        // }
-    }
-
-    let isVisible = true
     return (<Card className='swipe'>
         <div className='tinderCard'>
-            {filtered_items.map((r, i) => (<TinderCard
-                // onSwipe={(direction) => {console.log('Like ' + i + ' ' + Math.random())}}
-                onSwipe={(direction) => {handleSwipe(direction, i)}}
-                onCardLeftScreen={() => {console.log('Left screen')}}
-                preventSwipe={['up', 'down']}
-                swipeRequirementType='position'
-                className='cardItem'
-                key={r.id}
-            >
-                <img src={r.image_url} className='card' alt={r.title}/>
-            </TinderCard>))}
+            {filtered_items.map((r, i) => {
+                return i === filtered_items.length - 1 ? (<div className="cardItem" {...handlers} key={r.title}>
+                    <Draggable>
+                        <img src={r.image_url} className="card" alt={r.title}/>
+                    </Draggable>
+                </div>) : (<div className="cardItem" key={r.title}>
+                    <Draggable>
+                        <img src={r.image_url} className="card" alt={r.title}/>
+                    </Draggable>
+                </div>)
+            })}
         </div>
         <div className="textOverlay">
             {current.description}

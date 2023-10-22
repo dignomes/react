@@ -11,26 +11,8 @@ type SwipingState = {
 
 const initialState: SwipingState = {
   index: 0,
-  stocks: [
-        {
-          id: 6,
-          stock: "stock.Reaction.None",
-          title: "Andes - Crunchbase Investor Profile & Investments",
-          description: "Andes develops an integrated microbial technology to help accelerate crop growth.",
-          tags: "['agriculture', 'agtech', 'biotechnology', 'greentech', 'sustainability-e391']",
-          image_url: "https://images.crunchbase.com/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/u7utfet2oqdglu5mjrge.jpg",
-          ticker_symbol: 'AND'
-        }
-    ],
-  currentStock: {
-          id: 6,
-          stock: "stock.Reaction.None",
-          title: "Andes - Crunchbase Investor Profile & Investments",
-          description: "Andes develops an integrated microbial technology to help accelerate crop growth.",
-          tags: "['agriculture', 'agtech', 'biotechnology', 'greentech', 'sustainability-e391']",
-          image_url: "https://images.crunchbase.com/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/u7utfet2oqdglu5mjrge.jpg",
-          ticker_symbol: 'AND'
-        }
+  stocks: [],
+  currentStock: undefined
 };
 
 export const getSomeStocks = createAsyncThunk(
@@ -82,22 +64,26 @@ export const swipingSlice = createSlice({
     setSwiping: (state, action: PayloadAction<number>) => {
       // Handle the action here
     },
-    removeItem: (state, action: PayloadAction<string>) => {
-      state.stocks = state.stocks.filter(item => item.ticker_symbol !== action.payload);
+    removeItem: (state, action: PayloadAction<number>) => {
+      state.stocks = state.stocks.filter(item => item.id !== action.payload);
       state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
     },
-    setCurrent: (state, action: PayloadAction<string>) => {
-        state.currentStock = state.stocks.find(item => item.ticker_symbol == action.payload);
+    setCurrent: (state, action: PayloadAction<number>) => {
+        state.currentStock = state.stocks.find(item => item.id == action.payload);
     },
   },
   extraReducers: builder => {
     builder.addCase(getSomeStocks.fulfilled, (state, action) => {
       state.stocks = action.payload;  // Assuming the API returns an array of items directly.
       state.currentStock = action.payload.length ? action.payload[0] : undefined;
-    }).addCase(loadStocks.fulfilled, (state, action) => {
-        if(state.stocks.length <= 3) {
-            state.stocks = state.stocks.concat(action.payload);
-        }
+    }).addCase(sendStockLike.fulfilled, (state, action) => {
+      // @ts-ignore
+      state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
+      state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
+    }).addCase(sendStockDislike.fulfilled, (state, action) => {
+      // @ts-ignore
+      state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
+      state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
     });
   }
 });

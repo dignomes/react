@@ -4,7 +4,7 @@ import { Card, Link, CardContent, CardActions, Button, Table, TableHead, TableRo
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from './../../Store/Store';
 
-import { removeItem, selectStock, setAmount, setProportion, setSum } from './../../Store/CartSlice';
+import { removeItem, setAmount, setProportion, setSum } from './../../Store/CartSlice';
 import { CartItem } from "../../types";
 import styles from './CartTable.module.css';
 
@@ -51,20 +51,6 @@ const CartTable: React.FC = () => {
 
       dispatch(setProportion(payload));
     }; 
-    
-    const handleIsSelectedChange = (ticker: string, value: boolean) => {
-      console.log('handleIsSelectedChange: ' + value);
-
-      const payload: CartItem = {
-        ticker,
-        totalSum: 0,
-        amountOfStocks: 0,
-        proportion: 0,
-        isSelected: value
-      }
-
-      dispatch(selectStock(payload));
-    }; 
 
     const handleRemoveItem = (ticker: string) => {
         dispatch(removeItem(ticker));
@@ -72,13 +58,9 @@ const CartTable: React.FC = () => {
 
     const theme = useTheme();
 
-    const cellStyle = {
-        width: '150px',  // or whatever width you want
-        height: '40px',  // adjust as needed for desired height
-        textAlign: 'center',
-        padding: '8px 16px',  // adjust padding as needed
-      };
-      
+      const cornerRounding = '7px';
+      const backgroundColor = theme.palette.secondary.dark;
+      const textColor = theme.palette.primary.contrastText;
   
     return (
     <Card style={{ backgroundColor: '#f5f5f5' }}> {/* Change the background color as needed */}
@@ -89,7 +71,12 @@ const CartTable: React.FC = () => {
             <TableRow>
                 <TableCell 
                             className={`${styles.firstColumnStyle} ${styles.stickyCell} ${styles.rightAlignCell }`} 
-                            style={{ background: theme.palette.background.default }}
+                            style={{ 
+                                background: backgroundColor,
+                                color: textColor,
+                             }}
+                             
+                            sx={{ borderTopLeftRadius: cornerRounding }}
                             >
                     Symbol
                 </TableCell>
@@ -105,13 +92,22 @@ const CartTable: React.FC = () => {
                 <TableRow key={index}>
                     <TableCell 
                           className={`${styles.firstColumnStyle} ${styles.stickyCell}  ${styles.rightAlignCell } `} 
-                          style={{ background: theme.palette.background.default }}
+                          style={{ 
+                            background: backgroundColor,
+                            
+                         }}
+                         sx={index === cartItems.length - 1 ? { borderBottomLeftRadius: cornerRounding } : {}}
+                         
                         >
                         <Link 
                             component="a" 
                             href={`https://finance.yahoo.com/quote/${row.ticker}`} 
                             target="_blank" 
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer" style={{ 
+                                color: textColor,
+                                textDecoration: 'underline',
+                                textDecorationColor: textColor
+                            }}
                         >
                             {row.ticker}
                         </Link>
@@ -146,7 +142,10 @@ const CartTable: React.FC = () => {
                     <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>
                         <Button 
                             variant="contained" 
-                            color="secondary"
+                            style={{ 
+                                color: textColor,
+                                background: backgroundColor,
+                            }}
                             onClick={() => handleRemoveItem(row.ticker)}
                         >
                             Remove
