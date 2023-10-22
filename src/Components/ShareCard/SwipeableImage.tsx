@@ -12,7 +12,7 @@ const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function })
 
             if (!down) {
                 // If the image is swiped more than 50px, animate it off the screen
-                if (Math.abs(xDelta) > 20) {
+                if (Math.abs(xDelta) > 10) {
                     const direction = xDelta > 0 ? 'right' : 'left';
 
                     // Perform any additional actions based on the direction (e.g., trigger an event)
