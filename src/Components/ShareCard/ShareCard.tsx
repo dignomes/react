@@ -1,5 +1,4 @@
 import React from 'react'
-import {useSwipeable} from 'react-swipeable'
 import {Card} from '@mui/material'
 import {sendStockDislike, sendStockLike} from './../../Store/SwipingSlice';
 import {useDispatch, useSelector} from "react-redux";
@@ -19,18 +18,17 @@ const ShareCard = () => {
     let filtered_items = [...items].reverse();
     filtered_items = [...filtered_items].slice(-3);
 
-    const handlers = useSwipeable({
-        onSwiped: (eventData) => {
-            console.log("User Swiped!", eventData);
-            // dispatch(removeItem(current ? current.id : 0));
-            if (eventData.dir === 'Left') {
-                dispatch(sendStockDislike(current ? current.id : 0))
-            }
-            if (eventData.dir === 'Right') {
-                dispatch(sendStockLike(current ? current.id : 0))
-            }
-        },
-    });
+    const onSwiped = (e: any, data: any) => {
+        console.log("User Swiped!", data);
+        if (data.x < 0) {
+            console.log('dislike')
+            dispatch(sendStockDislike({id: current ? current.id : 0, load_data: items.length <= 3}))
+        }
+        if (data.x > 0) {
+            console.log('like')
+            dispatch(sendStockLike({id: current ? current.id : 0, load_data: items.length <= 3}))
+        }
+    };
 
     if (!current) {
         return (<div>no data</div>)
@@ -40,14 +38,14 @@ const ShareCard = () => {
         
         <div className='tinderCard'>
             {filtered_items.map((r, i) => {
-                return i === filtered_items.length - 1 ? (<div className="cardItem" {...handlers} key={r.title}>
-                    <Draggable>
+                return i === filtered_items.length - 1 ? (<div className="cardItem" key={r.title}>
+                    <Draggable axis="x" onStop={onSwiped}>
                         <img src={r.image_url} className="card" alt={r.title}/>
                     </Draggable>
                 </div>) : (<div className="cardItem" key={r.title}>
-                    <Draggable>
+                    <div>
                         <img src={r.image_url} className="card" alt={r.title}/>
-                    </Draggable>
+                    </div>
                 </div>)
             })}
         </div>

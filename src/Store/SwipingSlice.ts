@@ -42,16 +42,16 @@ export const getSingleStock = createAsyncThunk(
 
 export const sendStockLike = createAsyncThunk(
   'stocks/sendStockLike',
-  async (id: number) => {
-    const response = await likeStock(id);
+  async (data : {id: number, load_data: any}) => {
+    const response = await likeStock(data.id, data.load_data);
     return response;
   }
 );
 
 export const sendStockDislike = createAsyncThunk(
   'stocks/sendStockDislike',
-  async (id: number) => {
-    const response = await dislikeStock(id);
+  async (data : {id: number, load_data: any}) => {
+    const response = await dislikeStock(data.id, data.load_data);
     return response;
   }
 );
@@ -80,10 +80,16 @@ export const swipingSlice = createSlice({
       // @ts-ignore
       state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
       state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
+      if(action.payload){
+          state.stocks = state.stocks.concat(action.payload);
+      }
     }).addCase(sendStockDislike.fulfilled, (state, action) => {
       // @ts-ignore
       state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
       state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
+      if(action.payload){
+          state.stocks = state.stocks.concat(action.payload);
+      }
     });
   }
 });
