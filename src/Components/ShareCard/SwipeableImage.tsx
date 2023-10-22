@@ -1,14 +1,13 @@
 // SwipeableImage.js
 import React from 'react';
-import {useGesture} from 'react-use-gesture';
+import {useDrag} from 'react-use-gesture';
 import {animated, useSpring} from 'react-spring';
 import {Stock} from "../../types";
 
 const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function }) => {
     const [props, set] = useSpring(() => ({x: 0}));
 
-    const bind = useGesture({
-        onDrag: ({down, movement: [xDelta]}) => {
+    const bind = useDrag(({down, movement: [xDelta]}) => {
 
             if (!down) {
                 // If the image is swiped more than 50px, animate it off the screen
@@ -29,8 +28,8 @@ const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function })
                 // When dragging, update the position
                 set({x: xDelta});
             }
-        },
-    });
+        }
+    );
 
     return (
         <animated.div
