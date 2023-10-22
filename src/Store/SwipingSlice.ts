@@ -23,6 +23,15 @@ export const getSomeStocks = createAsyncThunk(
   }
 );
 
+
+export const loadStocks = createAsyncThunk(
+  'stocks/loadStocks',
+  async () => {
+    const response = await getStocks();
+    return response;
+  }
+);
+
 export const getSingleStock = createAsyncThunk(
   'stocks/getSingleStock',
   async () => {
