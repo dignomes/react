@@ -1,0 +1,54 @@
+/* Styles for the info button */
+.infoButton {
+  position: absolute !important;
+  right: 10px !important;
+  bottom: 10px !important;
+  z-index: 2 !important;
+  background-color: rgba(0, 0, 0, 0.6) !important; /* semi-transparent black */
+  color: white !important; /* icon color */
+  padding: 12px !important; /* increase padding to make it larger */
+  border-radius: 50% !important; /* rounded button */
+  transition: transform 0.2s ease-in-out !important; /* smooth transition for hover effect */
+}
+
+/* Hover effect to make it more noticeable */
+.infoButton:hover {
+  background-color: rgba(0, 0, 0, 0.8) !important; /* slightly darker on hover */
+  transform: scale(1.1) !important; /* scale up a bit */
+}
+
+/* Common styles for both visible and hidden states */
+.infoCardBase {
+  transition: transform 0.3s ease-in-out;
+  background-color: #fff;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  will-change: transform;
+}
+
+/* Initial position for the info card (hidden) */
+.infoCardHidden {
+  transform: translateY(100%);
+}
+
+/* Position when the info card is visible */
+.infoCardVisible {
+  transform: translateY(0);
+}
+
+.textOverlay {
+  position: absolute;
+  bottom: 10px;  /* отступ от нижнего края */
+  left: 10px;  /* отступ от левого края */
+  background-color: #C2EFD3;
+  color: #023825;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* InfoComponent.module.css */
+.cardStopPosition {
+  position: absolute;
+  bottom: 100px;  /* Adjust as per your requirement */
+  width: 100%;  /* Makes the card take up the full width of its parent */
+}
