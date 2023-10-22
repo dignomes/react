@@ -44,6 +44,7 @@ const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function })
                 left: 0,
                 backgroundSize: 'cover',
                 willChange: 'transform',
+                maxWidth: '400px',
                 x,
                 y
             }}
