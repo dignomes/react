@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router';
 
 interface Props {
   isOpen: boolean;
@@ -8,7 +9,14 @@ interface Props {
 }
 
 const DisclaimerModal: React.FC<Props> = ({ isOpen, onAccept }) => {
+  
+    const navigate = useNavigate();
 
+    const onAcceptHandler = () => {
+      onAccept();
+      navigate('/learn');
+    }
+    
     const theme = useTheme();
     const dialogStyle = {
         backgroundColor: theme.palette.primary.main,
@@ -33,7 +41,7 @@ const DisclaimerModal: React.FC<Props> = ({ isOpen, onAccept }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onAccept} style={{ color: theme.palette.primary.light }}>
+        <Button onClick={onAcceptHandler} style={{ color: theme.palette.primary.light }}>
           I AGREE
         </Button>
       </DialogActions>

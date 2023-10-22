@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
         </Typography>
         
         <Button color="inherit" component={Link} to="/">Swipe</Button>
-        <Button color="inherit" component={Link} to="/about">Learn</Button>
+        <Button color="inherit" component={Link} to="/learn">Learn</Button>
         {/* <Button color="inherit" component={Link} to="/contacts">Contacts</Button> */}
         <Button color="inherit" component={Link} to="/cart">
           <Badge badgeContent={cartItemsAmount > 0 ? cartItemsAmount : null} color="secondary">
