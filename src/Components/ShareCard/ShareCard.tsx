@@ -1,49 +1,52 @@
-import React from 'react'
-import TinderCard from 'react-tinder-card'
+import React, {useMemo, useRef} from 'react'
+import {useSwipeable} from 'react-swipeable'
 import {Card} from '@mui/material'
 import {removeItem, sendStockLike, sendStockDislike} from './../../Store/SwipingSlice';
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../Store/Store";
 
+import Draggable from 'react-draggable'
+
+
 const ShareCard = () => {
     const dispatch = useDispatch<AppDispatch>();
-    let items = useSelector((state: RootState) => state.swiping.stocks);
-    const current = useSelector((state: RootState) => state.swiping.currentStock);
+    const swiping = useSelector((state: RootState) => state.swiping);
+    const items = swiping.stocks;
+    const current = swiping.currentStock;
 
-    items = [...items].reverse();
+
+    let filtered_items = [...items].reverse();
+    filtered_items = [...filtered_items].slice(-3);
+    const handlers = useSwipeable({
+        onSwiped: (eventData) => {
+            console.log("User Swiped!", eventData);
+            // dispatch(removeItem(current ? current.id : 0));
+            if (eventData.dir === 'Left') {
+                dispatch(sendStockDislike(current ? current.id : 0))
+            }
+            if (eventData.dir === 'Right') {
+                dispatch(sendStockLike(current ? current.id : 0))
+            }
+        },
+    });
 
     if (!current) {
         return (<div>no data</div>)
     }
-    //
-    // const removeCard = () => {
-    //     dispatch(removeItem(current.id));
-    // }
 
-    const handleSwipe = (direction: any) => {
-        dispatch(removeItem(current.id));
-        if (direction === 'right') {
-            dispatch(sendStockLike(current.id))
-        } else {
-            dispatch(sendStockDislike(current.id))
-        }
-    }
-
-    console.log(items);
-
-    let isVisible = true
     return (<Card className='swipe'>
         <div className='tinderCard'>
-            {items.map((r, i) => (<TinderCard
-                onSwipe={handleSwipe}
-                // onCardLeftScreen={removeCard}
-                preventSwipe={['up', 'down']}
-                swipeRequirementType='position'
-                className='cardItem'
-                key={i}
-            >
-                <img src={r.image_url} className='card' alt={r.title}/>
-            </TinderCard>))}
+            {filtered_items.map((r, i) => {
+                return i === filtered_items.length - 1 ? (<div className="cardItem" {...handlers} key={r.title}>
+                    <Draggable>
+                        <img src={r.image_url} className="card" alt={r.title}/>
+                    </Draggable>
+                </div>) : (<div className="cardItem" key={r.title}>
+                    <Draggable>
+                        <img src={r.image_url} className="card" alt={r.title}/>
+                    </Draggable>
+                </div>)
+            })}
         </div>
         <div className="textOverlay">
             {current.description}

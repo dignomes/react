@@ -67,6 +67,14 @@ export const swipingSlice = createSlice({
     builder.addCase(getSomeStocks.fulfilled, (state, action) => {
       state.stocks = action.payload;  // Assuming the API returns an array of items directly.
       state.currentStock = action.payload.length ? action.payload[0] : undefined;
+    }).addCase(sendStockLike.fulfilled, (state, action) => {
+      // @ts-ignore
+      state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
+      state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
+    }).addCase(sendStockDislike.fulfilled, (state, action) => {
+      // @ts-ignore
+      state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
+      state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
     });
   }
 });
