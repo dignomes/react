@@ -50,9 +50,9 @@ const ShareCard = () => {
 
         <div className='tinderCard'>
             {filtered_items.map((stock, i) => {
-                return i === filtered_items.length - 1 ? (<div className="cardItem" key={stock.title}>
-                    <SwipeableImage stock={stock} onSwiped={onSwiped}/>
-                </div>) : (<div className="cardItem" key={stock.title}>
+                return i === filtered_items.length - 1 ? (
+                    <SwipeableImage stock={stock} onSwiped={onSwiped} key={stock.title}/>
+                ) : (<div className="cardItem" key={stock.title}>
                     <div>
                         <img
                             src={stock.image_url}
