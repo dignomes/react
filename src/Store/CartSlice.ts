@@ -31,14 +31,26 @@ export const cartSlice = createSlice({
     setSum: (state, action: PayloadAction<CartItem>) => {
       const item = state.items.find(el => el.ticker == action.payload.ticker)
       if(item) {
+        item.amountOfStocks = action.payload.totalSum / item.price;
         item.totalSum = action.payload.totalSum;
+
+        const portfolioSum = state.items.reduce((sum, item) => sum + item.totalSum, 0);
+        console.log("portfolioSum");
+        console.log(portfolioSum);
+        state.items = state.items.map(item => ({ ...item, proportion: item.totalSum / portfolioSum * 100 }));
       }
     },
 
     setAmount: (state, action: PayloadAction<CartItem>) => {
       const item = state.items.find(el => el.ticker == action.payload.ticker)
       if(item) {
+        item.totalSum = action.payload.amountOfStocks * item.price;
         item.amountOfStocks = action.payload.amountOfStocks;
+        
+        const portfolioSum = state.items.reduce((sum, item) => sum + item.totalSum, 0);
+        console.log("portfolioSum");
+        console.log(portfolioSum);
+        state.items = state.items.map(item => ({ ...item, proportion: item.totalSum / portfolioSum * 100 }));
       }
     },
 

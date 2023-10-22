@@ -3,6 +3,7 @@ export type CartItem = {
     totalSum: number;
     amountOfStocks: number;
     proportion: number;
+    price: number;
 };
 
 export type Stock = {

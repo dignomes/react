@@ -28,13 +28,16 @@ const ShareCard = () => {
             console.log('like')
             dispatch(sendStockLike({id: current ? current.id : 0, load_data: items.length <= 3}))
             if(current) {
+                const min = 10;
+                const max = 400;
+                const randomPrice = Math.floor(Math.random() * (max - min + 1) + min);
                 
                 const cartItem: CartItem = {
                     ticker: current.ticker_symbol,
                     totalSum: 0,
                     amountOfStocks: 0,
                     proportion: 0,
-
+                    price: randomPrice
                 };
 
                 dispatch(addItem(cartItem))

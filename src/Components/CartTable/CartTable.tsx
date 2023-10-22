@@ -20,6 +20,7 @@ const CartTable: React.FC = () => {
         totalSum: sum,
         amountOfStocks: 0,
         proportion: 0,
+        price: 0
       }
 
       dispatch(setSum(payload));
@@ -32,6 +33,7 @@ const CartTable: React.FC = () => {
         totalSum: 0,
         amountOfStocks: amount,
         proportion: 0,
+        price: 0
       }
 
       dispatch(setAmount(payload));
@@ -44,6 +46,7 @@ const CartTable: React.FC = () => {
         totalSum: 0,
         amountOfStocks: 0,
         proportion,
+        price:0
       }
 
       dispatch(setProportion(payload));
@@ -121,10 +124,11 @@ const CartTable: React.FC = () => {
                         </Link>
                     </TableCell>
                     <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>
-                        10
+                        {row.price}
                     </TableCell>
-                    
-                    <TableCell className={styles.cellStyle}>
+                    <TableCell
+                        align="right" 
+                        className={styles.cellStyle}>
                         <TextField
                             style={smallButtonSizeStyles}
                             InputProps={inputPropsStyles}
@@ -134,7 +138,9 @@ const CartTable: React.FC = () => {
                             type="number"
                         />
                     </TableCell>
-                    <TableCell className={styles.cellStyle}>
+                    <TableCell 
+                        align="right" 
+                        className={styles.cellStyle}>
                         <TextField
                             style={smallButtonSizeStyles}
                             InputProps={inputPropsStyles}
@@ -147,7 +153,9 @@ const CartTable: React.FC = () => {
                         variant="outlined"
                         />
                     </TableCell>
-                    <TableCell className={styles.cellStyle}>
+                    <TableCell 
+                        align="right" 
+                        className={styles.cellStyle}>
                         <TextField
                             style={smallButtonSizeStyles}
                             InputProps={inputPropsStyles}
