@@ -36,14 +36,6 @@ const Home: React.FC = () => {
         </div>
 
 
-        {!isMobile && (<Box mt={3} className='swipeDesisionBox'> {/* Margin-top for some space */}
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
-                Like
-            </Button>
-            <Button variant="contained" color="secondary">
-                Dislike
-            </Button>
-        </Box>)}
     </Box>);
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Link, Paper, Typography} from '@mui/material'
+import {Box, Card, Link, Paper, Typography} from '@mui/material'
 import {sendStockDislike, sendStockLike} from './../../Store/SwipingSlice';
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../Store/Store";
@@ -8,6 +8,7 @@ import SwipeableImage from "./SwipeableImage";
 import {addItem} from '../../Store/CartSlice';
 import {CartItem} from '../../types';
 import {useTheme} from '@mui/material/styles';
+import Button from "@mui/material/Button";
 
 
 const ShareCard = () => {
@@ -30,7 +31,7 @@ const ShareCard = () => {
     };
 
 
-    const onSwiped = (direction: string, id: number) => {
+    const onSwiped = (direction: string) => {
         console.log("User Swiped!", direction);
         if (direction === 'left') {
             console.log('dislike')
@@ -60,6 +61,8 @@ const ShareCard = () => {
     if (!current) {
         return (<div>no data</div>)
     }
+
+    const isMobile = window.innerWidth <= 768;
 
     return (<Card className='swipe'>
             <Paper elevation={2} sx={sxStyles}>
@@ -100,7 +103,27 @@ const ShareCard = () => {
             </div>
 
             <InfoComponent current={current}/>
+
+            {!isMobile && (<Box mt={3} className='swipeDesisionBox'> {/* Margin-top for some space */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    style={{marginRight: '10px'}}
+                    onClick={() => onSwiped('right')}
+                >
+                    Like
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => onSwiped('right')}
+                >
+                    Dislike
+                </Button>
+            </Box>)
+            }
         </Card>
+
     )
 }
 
