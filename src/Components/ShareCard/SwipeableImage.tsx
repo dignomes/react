@@ -40,7 +40,7 @@ const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function })
                 left: 0,
                 backgroundSize: 'cover',
                 willChange: 'transform',
-                transform: props.x.interpolate((x) => `translate3d(${x}px, 0, 0)`),
+                transform: props.x.to((x) => `translate3d(${x}px, 0, 0)`),
             }}
         >
             <img
