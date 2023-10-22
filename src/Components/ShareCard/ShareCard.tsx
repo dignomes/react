@@ -6,6 +6,7 @@ import {AppDispatch, RootState} from "../../Store/Store";
 import InfoComponent from '../InfoComponent/InfoComponent';
 
 import Draggable from 'react-draggable'
+import SwipeableImage from "./SwipeableImage";
 import { addItem } from '../../Store/CartSlice';
 import { CartItem } from '../../types';
 
@@ -19,13 +20,13 @@ const ShareCard = () => {
     let filtered_items = [...items].reverse();
     filtered_items = [...filtered_items].slice(-3);
 
-    const onSwiped = (e: any, data: any) => {
-        console.log("User Swiped!", data);
-        if (data.x < 0) {
+    const onSwiped = (direction: string, id: number) => {
+        console.log("User Swiped!", direction);
+        if (direction === 'left') {
             console.log('dislike')
             dispatch(sendStockDislike({id: current ? current.id : 0, load_data: items.length <= 3}))
         }
-        if (data.x > 0) {
+        if (direction === 'right') {
             console.log('like')
             dispatch(sendStockLike({id: current ? current.id : 0, load_data: items.length <= 3}))
             if(current) {
@@ -47,13 +48,11 @@ const ShareCard = () => {
     }
 
     return (<Card className='swipe'>
-        
+
         <div className='tinderCard'>
             {filtered_items.map((r, i) => {
                 return i === filtered_items.length - 1 ? (<div className="cardItem" key={r.title}>
-                    <Draggable axis="x" onStop={onSwiped}>
-                        <img src={r.image_url} className="card" alt={r.title}/>
-                    </Draggable>
+                    <SwipeableImage stock={r} onSwiped={onSwiped}/>
                 </div>) : (<div className="cardItem" key={r.title}>
                     <div>
                         <img src={r.image_url} className="card" alt={r.title}/>
@@ -62,7 +61,7 @@ const ShareCard = () => {
             })}
         </div>
 
-        <InfoComponent current={current} />
+        <InfoComponent current={current}/>
     </Card>)
 }
 
