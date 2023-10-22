@@ -61,6 +61,17 @@ const CartTable: React.FC = () => {
       const cornerRounding = '7px';
       const backgroundColor = theme.palette.secondary.dark;
       const textColor = theme.palette.primary.contrastText;
+      const smallButtonSizeStyles = {
+        fontSize: '0.75rem',
+        padding: '4px 6px',
+        height: '32px'
+        };
+
+        const inputPropsStyles = {
+            style: {
+                fontSize: '0.75rem'
+            }
+        };
   
     return (
     <Card style={{ backgroundColor: '#f5f5f5' }}> {/* Change the background color as needed */}
@@ -81,10 +92,10 @@ const CartTable: React.FC = () => {
                     Symbol
                 </TableCell>
                 <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>Price</TableCell>
-                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>Shares</TableCell>
-                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>Value ($)</TableCell>
-                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>Proportion</TableCell>
-                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>Remove</TableCell>
+                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } ${styles.header}`}>Shares</TableCell>
+                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } ${styles.header}`}>Total ($)</TableCell>
+                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } ${styles.header}`}>Percentage</TableCell>
+                <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
@@ -115,15 +126,22 @@ const CartTable: React.FC = () => {
                     <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>
                         10
                     </TableCell>
+                    
                     <TableCell className={styles.cellStyle}>
-                        <TextField className={`${styles.rightAlignCell } `}
-                        value={row.proportion}
-                        onChange={(e) => handleProportionChange(row.ticker, parseFloat(e.target.value))}
-                        type="number"
+                        <TextField
+                            style={smallButtonSizeStyles}
+                            InputProps={inputPropsStyles}
+                            size="small"
+                            value={row.amountOfStocks}
+                            onChange={(e) => handleAmountOfStocksChange(row.ticker, parseFloat(e.target.value))}
+                            type="number"
                         />
                     </TableCell>
                     <TableCell className={styles.cellStyle}>
                         <TextField
+                            style={smallButtonSizeStyles}
+                            InputProps={inputPropsStyles}
+                            size="small"
                         value={row.totalSum}
                         onChange={(e) => 
                             handleSumChange(row.ticker, parseFloat(e.target.value))
@@ -134,13 +152,16 @@ const CartTable: React.FC = () => {
                     </TableCell>
                     <TableCell className={styles.cellStyle}>
                         <TextField
-                        value={row.amountOfStocks}
-                        onChange={(e) => handleAmountOfStocksChange(row.ticker, parseFloat(e.target.value))}
+                            style={smallButtonSizeStyles}
+                            InputProps={inputPropsStyles}
+                            size="small"
+                        value={row.proportion}
+                        onChange={(e) => handleProportionChange(row.ticker, parseFloat(e.target.value))}
                         type="number"
                         />
                     </TableCell>
                     <TableCell className={`${styles.cellStyle} ${styles.rightAlignCell } `}>
-                        <Button 
+                        <Button size="small" 
                             variant="contained" 
                             style={{ 
                                 color: textColor,
@@ -158,8 +179,11 @@ const CartTable: React.FC = () => {
         </TableContainer>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-        <Button variant="contained" color="primary">
-            Buy
+        <Button 
+            variant="contained"
+            style={{ marginRight: '16px', marginBottom: '16px',  }}
+            color="primary">
+            Invest
         </Button>
         </CardActions>
     </Card>

@@ -7,7 +7,6 @@ import InfoComponent from '../InfoComponent/InfoComponent';
 
 import Draggable from 'react-draggable'
 
-
 const ShareCard = () => {
     const dispatch = useDispatch<AppDispatch>();
     const swiping = useSelector((state: RootState) => state.swiping);

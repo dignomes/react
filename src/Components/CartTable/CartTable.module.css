@@ -1,16 +1,19 @@
 .cellStyle {
     width: 100px;
     text-align: center;
-    padding: 8px 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    height: 40px;
+    height: 40px !important; /* You can adjust this value */
+    padding: 4px 8px;
   }
+
+.cellStyle.header {
+  padding-right: 14px;
+}
 
 .firstColumnStyle {
     width: 50px;
-    height: 40px;
 }
 
 .rightAlignCell {
@@ -30,17 +33,26 @@
   
   .visualColors{
     --primary-main: #004F4A;
---primary-light: #65FF9D;
---primary-dark: #002F35;
---primary-contrastText: #fff;
---secondary-main: #02CB6D;
---secondary-light: #4FE8A0;
---secondary-dark: #00984A;
---secondary-contrastText: #000;
---error-main: #f44336;
---background-default: #C2EFD3;
---background-paper: #33A085;
---text-primary: #023825;
---text-secondary: #6A4F4B;
-
+    --primary-light: #65FF9D;
+    --primary-dark: #002F35;
+    --primary-contrastText: #fff;
+    --secondary-main: #02CB6D;
+    --secondary-light: #4FE8A0;
+    --secondary-dark: #00984A;
+    --secondary-contrastText: #000;
+    --error-main: #f44336;
+    --background-default: #C2EFD3;
+    --background-paper: #33A085;
+    --text-primary: #023825;
+    --text-secondary: #6A4F4B;
   }
+
+.smallerTextField {
+  font-size: 0.75rem;
+  padding: 4px 6px;
+  height: 32px;
+}
+
+.smallerTextField input {
+  font-size: 0.75rem;
+}
