@@ -7,7 +7,7 @@ export const getStocks = async () => {
     console.log("response");
     console.log(response);
     const st: Stock[] = response.data.map((el: any) => {
-        el.tags = el.tags.slice(1, -1).split(",");
+        el.tags = el.tags.split("/");
         return el;
     });
 
