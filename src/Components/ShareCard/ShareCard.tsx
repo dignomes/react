@@ -4,6 +4,7 @@ import {Card} from '@mui/material'
 import {removeItem, sendStockLike, sendStockDislike} from './../../Store/SwipingSlice';
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../Store/Store";
+import InfoComponent from '../InfoComponent/InfoComponent';
 
 import Draggable from 'react-draggable'
 
@@ -35,6 +36,7 @@ const ShareCard = () => {
     }
 
     return (<Card className='swipe'>
+        
         <div className='tinderCard'>
             {filtered_items.map((r, i) => {
                 return i === filtered_items.length - 1 ? (<div className="cardItem" {...handlers} key={r.title}>
@@ -48,9 +50,8 @@ const ShareCard = () => {
                 </div>)
             })}
         </div>
-        <div className="textOverlay">
-            {current.description}
-        </div>
+
+        <InfoComponent current={current} />
     </Card>)
 }
 

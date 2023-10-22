@@ -103,6 +103,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*" // other paths
+    "src/**/*.d.ts"
   ]
+  
 }
