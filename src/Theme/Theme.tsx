@@ -26,16 +26,33 @@ const theme = createTheme({
       primary: '#023825',  // Darkened version of the primary dark color.
       secondary: '#6A4F4B',  // Kept the original earthy brown for secondary text.
     }
-  },
-  components: {  // <-- Add this key
+  },components: {
     MuiInputBase: { 
       styleOverrides: {
         input: {
           textAlign: 'right',
+          height: '14px',  // Adjust the height as required
+          padding: '4px 8px',  // Symmetrical vertical padding with more horizontal padding
         },
       },
     },
-  },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          height: '14px',  // Adjust the height as required
+          padding: '4px 8px',  // Symmetrical padding with more horizontal space
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          height: '14px',  // Adjust the height as required
+          padding: '4px 8px',  // Symmetrical padding
+        },
+      },
+    },
+  }
 });
 
 export default theme;
