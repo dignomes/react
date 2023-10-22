@@ -6,13 +6,15 @@ import {AppDispatch, RootState} from "../../Store/Store";
 import InfoComponent from '../InfoComponent/InfoComponent';
 
 import Draggable from 'react-draggable'
+import { addItem } from '../../Store/CartSlice';
+import { CartItem } from '../../types';
 
 const ShareCard = () => {
     const dispatch = useDispatch<AppDispatch>();
     const swiping = useSelector((state: RootState) => state.swiping);
+    const cart = useSelector((state: RootState) => state.cart);
     const items = swiping.stocks;
     const current = swiping.currentStock;
-
 
     let filtered_items = [...items].reverse();
     filtered_items = [...filtered_items].slice(-3);
@@ -26,6 +28,17 @@ const ShareCard = () => {
         if (data.x > 0) {
             console.log('like')
             dispatch(sendStockLike({id: current ? current.id : 0, load_data: items.length <= 3}))
+            if(current) {
+                
+                const cartItem: CartItem = {
+                    ticker: current.ticker_symbol,
+                    totalSum: 0,
+                    amountOfStocks: 0,
+                    proportion: 0
+                };
+
+                dispatch(addItem(cartItem))
+            }
         }
     };
 

@@ -20,7 +20,6 @@ const CartTable: React.FC = () => {
         totalSum: sum,
         amountOfStocks: 0,
         proportion: 0,
-        isSelected: false
       }
 
       dispatch(setSum(payload));
@@ -33,7 +32,6 @@ const CartTable: React.FC = () => {
         totalSum: 0,
         amountOfStocks: amount,
         proportion: 0,
-        isSelected: false
       }
 
       dispatch(setAmount(payload));
@@ -46,7 +44,6 @@ const CartTable: React.FC = () => {
         totalSum: 0,
         amountOfStocks: 0,
         proportion,
-        isSelected: false
       }
 
       dispatch(setProportion(payload));

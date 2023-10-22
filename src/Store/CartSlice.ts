@@ -10,50 +10,7 @@ const savedCartData = localStorage.getItem('cartState');
 const parsedCartData: CartState | null = savedCartData ? JSON.parse(savedCartData) : null;
 
 const initialState: CartState = parsedCartData || {
-  items: [
-      {
-        ticker: 'AAPL',
-        totalSum: 10,
-        amountOfStocks: 44,
-        proportion: 44,
-        isSelected: true
-      },
-      {
-        ticker: 'XOM',
-        totalSum: 100,
-        amountOfStocks: 43,
-        proportion: 56,
-        isSelected: true
-      },
-      {
-        ticker: 'NEE',
-        totalSum: 43,
-        amountOfStocks: 5,
-        proportion: 12,
-        isSelected: true
-      },
-      {
-        ticker: 'TSLA',
-        totalSum: 10,
-        amountOfStocks: 30,
-        proportion: 40,
-        isSelected: true
-      },
-      {
-        ticker: 'WTS',
-        totalSum: 50,
-        amountOfStocks: 60,
-        proportion: 70,
-        isSelected: true
-      },
-      {
-        ticker: 'HASI',
-        totalSum: 20,
-        amountOfStocks: 30,
-        proportion: 40,
-        isSelected: true
-      },
-    ]
+  items: []
   };
   
 export const cartSlice = createSlice({
@@ -90,16 +47,9 @@ export const cartSlice = createSlice({
       if(item) {
         item.proportion = action.payload.proportion;
       }
-    },
-
-    selectStock: (state, action: PayloadAction<CartItem>) => {
-      const item = state.items.find(el => el.ticker == action.payload.ticker)
-      if(item) {
-        item.isSelected = action.payload.isSelected;
-      }
     }
   }
 });
 
-export const { addItem, removeItem, setSum, setAmount, setProportion, selectStock } = cartSlice.actions;
+export const { addItem, removeItem, setSum, setAmount, setProportion } = cartSlice.actions;
 export default cartSlice.reducer;
