@@ -35,8 +35,6 @@ export const cartSlice = createSlice({
         item.totalSum = action.payload.totalSum;
 
         const portfolioSum = state.items.reduce((sum, item) => sum + item.totalSum, 0);
-        console.log("portfolioSum");
-        console.log(portfolioSum);
         state.items = state.items.map(item => ({ ...item, proportion: item.totalSum / portfolioSum * 100 }));
       }
     },
@@ -48,8 +46,6 @@ export const cartSlice = createSlice({
         item.amountOfStocks = action.payload.amountOfStocks;
         
         const portfolioSum = state.items.reduce((sum, item) => sum + item.totalSum, 0);
-        console.log("portfolioSum");
-        console.log(portfolioSum);
         state.items = state.items.map(item => ({ ...item, proportion: item.totalSum / portfolioSum * 100 }));
       }
     },
