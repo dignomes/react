@@ -29,6 +29,9 @@ const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function })
                 // When dragging, update the position
                 api.start({x: xDelta});
             }
+        }, {
+            preventDefault: true,
+            filterTaps: true
         }
     );
 
