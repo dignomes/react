@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Card, Link, Paper, Typography} from '@mui/material'
+import {Box, Card, Chip, Link, Paper, Typography} from '@mui/material'
 import {sendStockDislike, sendStockLike} from './../../Store/SwipingSlice';
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../Store/Store";
@@ -82,6 +82,9 @@ const ShareCard = () => {
                     {current.ticker_symbol}
                 </Link>
             </Paper>
+            {current.tags.slice(0, 2).map((e, i) => (
+                <Chip label={e} key={e}/>
+            ))}
             <div className='tinderCard'>
                 {filtered_items.map((stock, i) => {
                     return i === filtered_items.length - 1 ? (
