@@ -27,7 +27,7 @@ export const getStock = async () => {
     return st;
 }
 
-export const likeStock = async (id: number) => {
+export const likeStock = async (id: number, load_data: boolean) => {
     const response = await axiosInstance.post(
         '/api/stock-reaction//',
         {
@@ -36,12 +36,12 @@ export const likeStock = async (id: number) => {
             "reaction": "LIKE"
         }
     );
-    // return response.data;
-    console.log("response");
-    console.log(response);
+    if(load_data){
+        return getStocks()
+    }
 }
 
-export const dislikeStock = async (id: number) => {
+export const dislikeStock = async (id: number, load_data: boolean) => {
     const response = await axiosInstance.post(
         '/api/stock-reaction//',
         {
@@ -50,7 +50,7 @@ export const dislikeStock = async (id: number) => {
             "reaction": "DISLIKE"
         }
     );
-    // return response.data;
-    console.log("response");
-    console.log(response);
+    if(load_data){
+        return getStocks()
+    }
 }
