@@ -87,9 +87,9 @@ export const swipingSlice = createSlice({
       // @ts-ignore
       state.stocks = state.stocks.filter(item => item.id !== state.currentStock.id);
       state.currentStock = state.stocks.length ? state.stocks[0] : undefined;
-      // if(action.payload){
-      //     state.stocks = state.stocks.concat(action.payload);
-      // }
+      if(action.payload){
+          state.stocks = state.stocks.concat(action.payload);
+      }
     });
   }
 });

@@ -29,7 +29,6 @@ const ShareCard = () => {
             dispatch(sendStockLike({id: current ? current.id : 0, load_data: items.length <= 3}))
         }
     };
-    // });
 
     if (!current) {
         return (<div>no data</div>)
