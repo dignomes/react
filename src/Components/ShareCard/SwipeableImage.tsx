@@ -5,13 +5,14 @@ import {animated, useSpring} from 'react-spring';
 import {Stock} from "../../types";
 
 const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function }) => {
-    const [props, set] = useSpring(() => ({x: 0}));
+    const [{x, y}, api] = useSpring(() => ({x: 0, y: 0}))
+    // const [props, set] = useSpring(() => ({x: 0}));
 
     const bind = useDrag(({down, movement: [xDelta]}) => {
 
             if (!down) {
                 // If the image is swiped more than 50px, animate it off the screen
-                if (Math.abs(xDelta) > 50) {
+                if (Math.abs(xDelta) > 20) {
                     const direction = xDelta > 0 ? 'right' : 'left';
 
                     // Perform any additional actions based on the direction (e.g., trigger an event)
@@ -19,14 +20,14 @@ const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function })
 
                     onSwiped(direction)
 
-                    set({x: xDelta > 0 ? window.innerWidth : -window.innerWidth});
+                    api.start({x: xDelta > 0 ? window.innerWidth : -window.innerWidth});
                 } else {
                     // If not, reset the position
-                    set({x: 0});
+                    api.start({x: 0});
                 }
             } else {
                 // When dragging, update the position
-                set({x: xDelta});
+                api.start({x: xDelta});
             }
         }
     );
@@ -40,7 +41,8 @@ const SwipeableImage = ({stock, onSwiped}: { stock: Stock, onSwiped: Function })
                 left: 0,
                 backgroundSize: 'cover',
                 willChange: 'transform',
-                transform: props.x.to((x) => `translate3d(${x}px, 0, 0)`),
+                x,
+                y
             }}
         >
             <img
